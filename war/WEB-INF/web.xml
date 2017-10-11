@@ -14,8 +14,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	
 	<servlet>
-		<servlet-name>AvaibleLocaleServlet</servlet-name>
-		<servlet-class>be.steformations.sivananda.server.AvaibleLocaleServlet</servlet-class>
+		<servlet-name>AvailableLocaleServlet</servlet-name>
+		<servlet-class>be.steformations.sivananda.server.AvailableLocaleServlet</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -24,7 +24,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	
 	<servlet-mapping>
-		<servlet-name>AvaibleLocaleServlet</servlet-name>
+		<servlet-name>AvailableLocaleServlet</servlet-name>
 		<url-pattern>/available/locales</url-pattern>
 	</servlet-mapping>
 </web-app>
