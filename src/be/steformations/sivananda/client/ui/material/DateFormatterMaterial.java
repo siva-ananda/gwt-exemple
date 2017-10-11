@@ -11,36 +11,42 @@ import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialIntegerBox;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialListBox;
-import gwt.material.design.client.ui.MaterialTextBox;
+//import gwt.material.design.client.ui.MaterialTextBox;
 
-public class DateFormatterMaterial extends Composite implements DateFormatterUI{
+public class DateFormatterMaterial extends Composite implements DateFormatterUI {
 
 	private static DateFormatterMaterialUiBinder uiBinder = GWT.create(DateFormatterMaterialUiBinder.class);
 
 	interface DateFormatterMaterialUiBinder extends UiBinder<Widget, DateFormatterMaterial> {
 	}
-	
-	@UiField MaterialListBox dayInput;
-	@UiField MaterialListBox monthInput;
-	@UiField MaterialIntegerBox yearInput;
-	@UiField MaterialTextBox localeInput;
-	@UiField MaterialButton formatEventSource;
-	@UiField MaterialLabel output;
-	
-	private final String[] months = new String [] {
-			"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"
-	};
+
+	@UiField
+	MaterialListBox dayInput;
+	@UiField
+	MaterialListBox monthInput;
+	@UiField
+	MaterialIntegerBox yearInput;
+	// @UiField MaterialTextBox localeInput;
+	@UiField
+	MaterialListBox localeInput;
+	@UiField
+	MaterialButton formatEventSource;
+	@UiField
+	MaterialLabel output;
+
+	private final String[] months = new String[] { "janvier", "février", "mars", "avril", "mai", "juin", "juillet",
+			"août", "septembre", "octobre", "novembre", "décembre" };
 
 	public DateFormatterMaterial() {
 		initWidget(uiBinder.createAndBindUi(this));
-		for(int i = 1; i <= 31; i++){
-			this.dayInput.add(""+i);
+		for (int i = 1; i <= 31; i++) {
+			this.dayInput.add("" + i);
 		}
-		for(int i = 0; i < months.length; i++){
-			this.monthInput.addItem(""+i, months[i]);
+		for (int i = 0; i < months.length; i++) {
+			this.monthInput.addItem("" + i, months[i]);
 		}
 		this.yearInput.setValue(2017);
-		this.localeInput.setText("en");
+		// this.localeInput.setText("en");
 	}
 
 	@Override
@@ -58,8 +64,12 @@ public class DateFormatterMaterial extends Composite implements DateFormatterUI{
 		return yearInput;
 	}
 
+	/*
+	 * @Override public MaterialTextBox getLocaleInput() { return localeInput; }
+	 */
+
 	@Override
-	public MaterialTextBox getLocaleInput() {
+	public MaterialListBox getLocaleInput() {
 		return localeInput;
 	}
 
@@ -71,6 +81,18 @@ public class DateFormatterMaterial extends Composite implements DateFormatterUI{
 	@Override
 	public MaterialLabel getOutput() {
 		return output;
+	}
+
+	@Override
+	public void setLocales(String[] locales) {
+		GWT.log("DateFormatterMaterial.setLocales()");
+		this.localeInput.clear();
+		for (String s : locales) {
+			this.localeInput.add(s);
+		}
+		if (locales.length > 0) {
+			this.localeInput.setSelectedIndex(0);
+		}
 	}
 
 }

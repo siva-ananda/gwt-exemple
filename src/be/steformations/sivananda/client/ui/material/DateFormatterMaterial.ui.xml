@@ -13,8 +13,9 @@
 				<m:MaterialColumn grid="s3"> <!-- année -->
 					<m:MaterialIntegerBox label="année" ui:field="yearInput"/>
 				</m:MaterialColumn>
-				<m:MaterialColumn grid="s3"> <!--  jours -->
-					<m:MaterialTextBox label="locale" ui:field="localeInput"/>
+				<m:MaterialColumn grid="s3"> <!--  locale -->
+					<!-- <m:MaterialTextBox label="locale" ui:field="localeInput"/> -->
+					<m:MaterialListBox placeholder="locale" ui:field="localeInput"/>
 				</m:MaterialColumn>
 			</m:MaterialRow>
 			<m:MaterialRow> <!--  bouton et résultat -->
