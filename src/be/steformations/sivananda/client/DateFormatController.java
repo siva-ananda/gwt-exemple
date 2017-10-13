@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.user.client.Window;
 
@@ -13,6 +14,8 @@ import be.steformations.sivananda.client.http.rpc.DateFormatRpcDateResultCallbac
 import be.steformations.sivananda.client.http.rpc.DateFormatRpcService;
 import be.steformations.sivananda.client.http.rpc.DateFormatRpcServiceAsync;
 import be.steformations.sivananda.client.http.standard.LocalesRequestCallback;
+import be.steformations.sivananda.client.json.DateFormatJsonDateResultCallback;
+import be.steformations.sivananda.client.json.DateParamsObjectMapper;
 //import be.steformations.sivananda.client.http.rpc.DateFormatRpcStringCallback;
 import be.steformations.sivananda.client.ui.DateFormatterUI;
 
@@ -38,7 +41,8 @@ public class DateFormatController implements ClickHandler {
 		GWT.log(params.toString());
 
 		// this.formatDateRpc(params);
-		this.formatDateToObjectRpc(params);
+		//this.formatDateToObjectRpc(params);
+		this.formatDateToObjectJson(params);
 	}
 
 	public void setFormatedDate(String s) {
@@ -65,11 +69,32 @@ public class DateFormatController implements ClickHandler {
 	 * callback); // appel http }
 	 */
 
-	private void formatDateToObjectRpc(DateParams params) {
+	/*private void formatDateToObjectRpc(DateParams params) {
 		GWT.log("DateFormatController.formatDateToObjectRpc()");
 		DateFormatRpcServiceAsync service = GWT.create(DateFormatRpcService.class);
 		DateFormatRpcDateResultCallback callback = new DateFormatRpcDateResultCallback(this);
 		service.formatToObject(params, callback);
+	}*/
+	
+	private void formatDateToObjectJson(DateParams params){
+		GWT.log("DateFormatController.formatDateToObjectJson()");
+		DateParamsObjectMapper mapper = GWT.create(DateParamsObjectMapper.class);
+		String json = mapper.write(params);
+		GWT.log(json);
+		
+		RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, "http://127.0.0.1:8888/json/service");
+		RequestCallback callback = new DateFormatJsonDateResultCallback(this);
+		
+		builder.setCallback(callback);
+		builder.setRequestData(json);
+		
+		try {
+			builder.send();
+		} catch (Exception e){
+			Window.alert(e.getMessage());
+		}
+		
+		
 	}
 
 	private void getAvailableLocales() {
