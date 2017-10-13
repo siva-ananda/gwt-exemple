@@ -18,6 +18,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-class>be.steformations.sivananda.server.AvailableLocaleServlet</servlet-class>
 	</servlet>
 	
+	<!-- peut être remplacé par une annotation dans la classe de la servlet -->
+	<servlet>
+		<servlet-name>DateFormatJsonService</servlet-name>
+		<servlet-class>be.steformations.sivananda.server.DateFormatJsonService</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>DateFormatterService</servlet-name>
 		<url-pattern>/dateformatter/service</url-pattern>
@@ -26,5 +32,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>AvailableLocaleServlet</servlet-name>
 		<url-pattern>/available/locales</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>DateFormatJsonService</servlet-name>
+		<url-pattern>/json/service</url-pattern>
 	</servlet-mapping>
 </web-app>
